@@ -1,0 +1,3 @@
+[submodule "src/vsftpd_exploit"]
+	path = src/vsftpd_exploit
+	url = git@github.com:linwebs/vsftpd_2.3.4_Exploit.git

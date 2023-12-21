@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="8c433ef5-f682-4e4e-95ef-2c8073926db8" name="htcf-attacker">
+        <fileTransfer rootFolder="/home/islabcs/Documents/auto-penetration-tool" accessType="SFTP" host="10.81.1.11" port="22" sshConfigId="56b2863f-b343-493f-bbcd-f665294161e7" sshConfig="islabcs@10.81.1.11:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
