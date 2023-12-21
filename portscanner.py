@@ -10,11 +10,11 @@ def portscan(ip, port):
 	# print("IP Lists :", nm.all_hosts())
 	scanner = {}
 	sys.stdout.write("\033[F")
-	print("+------------------+------------+")
-	print("| Port open list                |")
-	print("+------------------+------------+")
-	print("|        IP        |    Port    |")
-	print("+------------------+------------+")
+	print("+------------------------------+")
+	print("| Port open list               |")
+	print("+------------------+-----------+")
+	print("|        IP        |    Port   |")
+	print("+------------------+-----------+")
 
 	all_port_open_count = 0
 	for this_host in nm.all_hosts():
@@ -34,31 +34,34 @@ def portscan(ip, port):
 								print(" ", end="")
 							for i in range(5 - len(str(this_port))):
 								print(" ", end="")
-							print(this_port, "port |")
+							print("{}/tcp |".format(this_port))
 
 							if this_port == 21:
-								if nm[this_host][this_protocol][this_port]['product'] == 'vsftpd' and \
-										nm[this_host][this_protocol][this_port]['version'] == '2.3.4':
-									tmp_service.append({'port': this_port, 'exploit': 'vsftpd_2_3_4'})
+								if nm[this_host][this_protocol][this_port]['product'] == 'vsftpd' and nm[this_host][this_protocol][this_port]['version'] == '2.3.4':
+									tmp_service.append({'port': this_port, 'protocol': this_protocol, 'exploit': 'vsftpd 2.3.4'})
 							if this_port == 22:
 								if nm[this_host][this_protocol][this_port]['product'] == 'OpenSSH':
-									tmp_service.append({'port': this_port, 'exploit': 'ssh_server'})
+									tmp_service.append({'port': this_port, 'protocol': this_protocol, 'exploit': 'ssh server'})
 							if this_port == 80:
 								if nm[this_host][this_protocol][this_port]['product'] == 'alphapd':
-									tmp_service.append({'port': this_port, 'exploit': 'ip_cam_web'})
+									tmp_service.append({'port': this_port, 'protocol': this_protocol, 'exploit': 'ip cam web'})
 								if nm[this_host][this_protocol][this_port]['product'] == 'Apache httpd':
-									tmp_service.append({'port': this_port, 'exploit': 'apache'})
+									tmp_service.append({'port': this_port, 'protocol': this_protocol, 'exploit': 'apache web server'})
 							if this_port == 554:
 								if nm[this_host][this_protocol][this_port][
 									'product'] == 'D-Link DCS-2130 or Pelco IDE10DN webcam rtspd':
-									tmp_service.append({'port': this_port, 'exploit': 'ip_cam_rtsp'})
+									tmp_service.append({'port': this_port, 'protocol': this_protocol, 'exploit': 'ip cam rtsp'})
 
 					scanner[this_host] = tmp_service
-			print("+------------------+------------+")
+
+			if host_port_open_count == 0:
+				print("     -      |")
+			print("+------------------+-----------+")
+
 
 		all_port_open_count += host_port_open_count
 	if all_port_open_count == 0:
-		print("| Not any port are open         |")
-		print("+------------------+------------+")
+		print("| No open port                  |")
+		print("+-------------------------------+")
 
 	return scanner
